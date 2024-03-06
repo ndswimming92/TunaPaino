@@ -10,6 +10,6 @@ namespace TunaPaino.Models
         public string? Album { get; set;}
         public int Length { get; set; }
 
-        public ICollection<Genre>? Genres { get; set; }
+        public ICollection<Song>? Songs { get; set; }
     }
 }
