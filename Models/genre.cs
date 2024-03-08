@@ -1,4 +1,4 @@
-﻿namespace TunaPaino.Models
+﻿namespace TunaPiano.Models
 {
     public class Genre
     {

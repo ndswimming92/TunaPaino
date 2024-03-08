@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TunaPaino.Models
+namespace TunaPiano.Models
 {
     public class Song
     {
