@@ -214,4 +214,20 @@ app.MapDelete("/api/deleteGenre/{genreId}", (TunaPianoDbContext db, int id) =>
     return Results.NoContent();
 });
 
+// View Single Genre and Associated Songs
+app.MapGet("/api/genreAssociatedSongs/genre={genreId}", (TunaPianoDbContext db, int genreId) =>
+{
+    var genreWithSongs = db.Genres
+        .Include(g => g.Songs)
+        .FirstOrDefault(g => g.Id == genreId);
+
+    if (genreWithSongs == null)
+    {
+        return Results.NotFound("Genre not found.");
+    }
+
+    return Results.Ok(genreWithSongs);
+
+});
+
 app.Run();
