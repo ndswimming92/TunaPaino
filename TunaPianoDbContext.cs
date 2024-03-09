@@ -7,19 +7,14 @@ public class TunaPianoDbContext : DbContext
     public DbSet<Genre> Genres { get; set; }
     public DbSet<Artist> Artists { get; set; }
 
-    public DbSet<SongGenre> SongGenres { get; set; }
 
-    public TunaPianoDbContext(DbContextOptions<TunaPianoDbContext> context) : base(context)
+    public TunaPianoDbContext(DbContextOptions<TunaPianoDbContext> options) : base(options)
     {
 
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
-        // Configure composite primary key for SongGenre
-        modelBuilder.Entity<SongGenre>()
-            .HasKey(sg => new { sg.SongId, sg.GenreId });
 
         // Seed data for Artists
         modelBuilder.Entity<Artist>().HasData(new Artist[]
@@ -44,7 +39,6 @@ public class TunaPianoDbContext : DbContext
         new Genre {Id = 4, Description="Indie"},
         new Genre {Id = 5, Description="Alternative Country"},
         });
+
     }
-
-
 }
