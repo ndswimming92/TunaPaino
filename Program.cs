@@ -130,7 +130,11 @@ app.MapPost("/api/createNewArtist", (TunaPianoDbContext db, Artist artist) =>
 
 
 // View list of all Artists
+app.MapGet("/api/viewAllArtists", (TunaPianoDbContext db) =>
+{
+    return db.Artists.ToList();
 
+});
 
 
 // Update a Artist
