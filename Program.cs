@@ -52,6 +52,23 @@ app.MapGet("/api/viewAllSongs", (TunaPianoDbContext db) =>
     return db.Songs.ToList();
 });
 
+// Update a Song
+app.MapPut("/api/updateSong/{songId}", (TunaPianoDbContext db, Song song, int id) =>
+{
+    Song updatedSong = db.Songs.SingleOrDefault(s => s.Id == id);
+    if (updatedSong == null)
+    {
+        return Results.NotFound();
+    }
+    updatedSong.Title = song.Title;
+    updatedSong.ArtistId = song.ArtistId;
+    updatedSong.Album = song.Album;
+    updatedSong.Length = song.Length;
+
+    db.SaveChanges();
+    return Results.Created($"/api/updateSong/song.id", song);
+
+});
 
 
 // Artist Endpoints
