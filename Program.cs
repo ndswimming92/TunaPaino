@@ -121,7 +121,12 @@ app.MapPost("/api/assignGenreToSong", (TunaPianoDbContext db, int songId, int ge
 
 // Artist Endpoints
 // Create a Artist
-
+app.MapPost("/api/createNewArtist", (TunaPianoDbContext db, Artist artist) =>
+{
+    db.Artists.Add(artist);
+    db.SaveChanges();
+    return Results.Created($"/api/createNewArtist/artist.Id", artist);
+});
 
 
 // View list of all Artists
