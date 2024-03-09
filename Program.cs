@@ -188,7 +188,17 @@ app.MapGet("/api/viewAllGenres", (TunaPianoDbContext db) =>
 
 
 // Update Genre
-
+app.MapPut("/api/updateGenre/{genreId}", (TunaPianoDbContext db, Genre genre, int id) =>
+{
+    Genre updatedGenre = db.Genres.SingleOrDefault(gen => gen.Id == id);
+    if (updatedGenre == null)
+    {
+        return Results.NotFound("Genre not found");
+    }
+    updatedGenre.Description = genre.Description;
+    db.SaveChanges();
+    return Results.Created($"/api/updateGenre/genre.id", genre);
+});
 
 
 // Delete a Genre
