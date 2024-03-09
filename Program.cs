@@ -138,7 +138,21 @@ app.MapGet("/api/viewAllArtists", (TunaPianoDbContext db) =>
 
 
 // Update a Artist
+app.MapPut("/api/updateArtist/{artistId}", (TunaPianoDbContext db, Artist artist, int id) =>
+{
+    Artist updatedArtist = db.Artists.SingleOrDefault(a => a.Id == id);
+    if (updatedArtist == null)
+    {
+        return Results.NotFound();
+    }
+    updatedArtist.Name = artist.Name;
+    updatedArtist.Age = artist.Age;
+    updatedArtist.Bio = artist.Bio;
 
+    db.SaveChanges();
+    return Results.Created($"/api/updateArtist/artist.id", artist);
+
+});
 
 
 // Delete a Artist
