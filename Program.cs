@@ -181,7 +181,10 @@ app.MapPost("/api/createNewGenre", (TunaPianoDbContext db, Genre genre) =>
 
 
 // View list of all Genres
-
+app.MapGet("/api/viewAllGenres", (TunaPianoDbContext db) =>
+{
+    return db.Genres.ToList();
+});
 
 
 // Update Genre
