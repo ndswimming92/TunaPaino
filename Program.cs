@@ -87,37 +87,21 @@ app.MapDelete("/api/deleteSong/{songId}", (TunaPianoDbContext db, int id) =>
 });
 
 // Details view of a single Song and its associated genres and artist details
-
-/*
- * app.MapGet("/api/detailsViewofSongs/{songId}", (TunaPianoDbContext db, int id) =>
+app.MapGet("/api/detailsViewOfSongs/{Id}", (TunaPianoDbContext db, int id) =>
 {
+    var song = db.Songs
+        .Include(s => s.Genres)
+        .FirstOrDefault(sg => sg.Id == id);
 
-    var song = db.Songs.Include(s => s.ArtistId).Include(s => s.Genres).FirstOrDefault(s => s.Id == id);
-    if (song == null)
-    {
-        return Results.NotFound();
-    }
+    var artist = from artists in db.Artists
+                 join songs in db.Songs on artists.Id equals songs.ArtistId
+                 select artists;
 
-    return Results.Ok(song);
+    var songDetails = new { song, artist };
 
+    return songDetails;
 });
 
-// Asigning Genre to Song
-app.MapPost("/api/assignGenreToSong", (TunaPianoDbContext db, int songId, int genreId) =>
-{
-    var song = db.Songs.SingleOrDefault(s => s.Id == songId);
-    var genre = db.Genres.SingleOrDefault(g => g.Id == genreId);
-
-    if (song.Genres == null)
-    {
-        song.Genres = new List<Genre>();
-    }
-    song.Genres.Add(genre);
-    db.SaveChanges();
-    return song;
-
-});
-*/
 
 // Artist Endpoints
 // Create a Artist
