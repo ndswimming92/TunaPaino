@@ -172,7 +172,12 @@ app.MapDelete("/api/deleteArtist/{artistId}", (TunaPianoDbContext db, int id) =>
 
 // Genre Endpoints
 // Create a Genre
-
+app.MapPost("/api/createNewGenre", (TunaPianoDbContext db, Genre genre) =>
+{
+    db.Genres.Add(genre);
+    db.SaveChanges();
+    return Results.Created($"/api/createNewGenre/genre.id", genre);
+});
 
 
 // View list of all Genres
