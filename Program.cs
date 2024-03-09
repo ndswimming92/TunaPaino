@@ -70,6 +70,21 @@ app.MapPut("/api/updateSong/{songId}", (TunaPianoDbContext db, Song song, int id
 
 });
 
+// Delete a song
+app.MapDelete("/api/deleteSong/{songId}", (TunaPianoDbContext db, int id) =>
+{
+    var song = db.Songs.SingleOrDefault(s => s.Id == id);
+
+    if (song == null)
+    {
+        return Results.NotFound("Song not found.");
+    }
+    db.Songs.Remove(song);
+    db.SaveChanges();
+
+    return Results.Ok("Song deleted successfully.");
+});
+
 
 // Artist Endpoints
 
