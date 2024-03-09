@@ -2,6 +2,7 @@ using TunaPiano.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http.Json;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -119,11 +120,36 @@ app.MapPost("/api/assignGenreToSong", (TunaPianoDbContext db, int songId, int ge
 */
 
 // Artist Endpoints
+// Create a Artist
+
+
+
+// View list of all Artists
+
+
+
+// Update a Artist
+
+
+
+// Delete a Artist
 
 
 
 // Genre Endpoints
+// Create a Genre
 
+
+
+// View list of all Genres
+
+
+
+// Update Genre
+
+
+
+// Delete a Genre
 
 
 app.Run();
