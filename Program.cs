@@ -225,4 +225,14 @@ app.MapGet("/api/genreAssociatedSongs/{genreId}", (TunaPianoDbContext db, int ge
 
 });
 
+// View Single Artist and Assocaited Songs
+app.MapGet("/api/artistAssociatedSongs/{artistId}", (TunaPianoDbContext db, int artistId) =>
+{
+    var artistAndSongs = from artist in db.Artists
+                         join song in db.Songs on artist.Id equals song.ArtistId
+                         where artist.Id == artistId
+                         select new { artist, song };
+    return artistAndSongs;
+});
+
 app.Run();
