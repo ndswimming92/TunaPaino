@@ -46,6 +46,12 @@ app.MapPost("/api/createNewSong", (TunaPianoDbContext db, Song song) =>
     return Results.Created($"/api/createNewSongsong.Id", song);
 });
 
+// View list of all Songs
+app.MapGet("/api/viewAllSongs", (TunaPianoDbContext db) =>
+{
+    return db.Songs.ToList();
+});
+
 
 
 // Artist Endpoints
