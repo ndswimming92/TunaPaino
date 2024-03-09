@@ -33,4 +33,27 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
+// ENDPOINTS--------------------------------------------------------------->
+
+// Song Endpoints
+// Create a Song
+app.MapPost("/api/createNewSong", (TunaPianoDbContext db, Song song) =>
+{
+    db.Songs.Add(song);
+    db.SaveChanges();
+
+    return Results.Created($"/api/createNewSongsong.Id", song);
+});
+
+
+
+// Artist Endpoints
+
+
+
+// Genre Endpoints
+
+
+
 app.Run();
