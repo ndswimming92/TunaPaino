@@ -156,7 +156,18 @@ app.MapPut("/api/updateArtist/{artistId}", (TunaPianoDbContext db, Artist artist
 
 
 // Delete a Artist
+app.MapDelete("/api/deleteArtist/{artistId}", (TunaPianoDbContext db, int id) =>
+{
+    var artist = db.Artists.SingleOrDefault(a => a.Id == id);
+    if (artist == null)
+    {
+        return Results.NotFound("Artist not found.");
+    }
+    db.Artists.Remove(artist);
+    db.SaveChanges();
+    return Results.NoContent();
 
+});
 
 
 // Genre Endpoints
